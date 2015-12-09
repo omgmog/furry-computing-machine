@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Furry Computing Machine</title>
+  <style>
+    body, html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    .furryWrapper {
+      margin: auto;
+      width: 900px;
+      height: 600px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+    }
+
+    .furry {
+      width: 400px;
+      height: 400px;
+      background-image: url(furry.gif);
+      background-position: 50%;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+    }
+    .numbers {
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 200px;
+    }
+    .number {
+      text-align: left;
+      height: 100px;
+    }
+    .number label {
+      display: block;
+      font-size: 25px;
+    }
+    .number input {
+      height: 30px;
+      width: 100%;
+    }
+    .operator {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+      height: 1em;
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+      line-height: 1;
+      vertical-align: middle;
+      color: #fff;
+      text-shadow: 0 0 10px #000;
+      font-size: 150px;
+      background: transparent;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #output {
+      width: 200px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-top: 200px;
+      font-size: 30px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="furryWrapper">
+    <h1>Input two numbers</h1>
+    <div class="numbers">
+      <div class="number numberOne">
+        <label for="numberOne">First Number</label>
+        <input type="number" id="numberOne">
+      </div>
+      <div class="number numberTwo">
+        <label for="numberTwo">Second Number</label>
+        <input type="number" id="numberTwo">
+      </div>
+    </div>
+    <div class="furry">
+      <div id="operator" class="operator">?</div>
+    </div>
+    <div id="output"></div>
+    <p>This useful tool was brought to you by Github Roulette.</p>
+  </div>
+  <script>
+    (function (window) {
+      'use strict';
+
+      var operators = [
+        {
+          sign: '+',
+          method: function (a, b) { return a + b; }
+        },
+        {
+          sign: '-',
+          method: function (a, b) { return a - b; }
+        },
+        {
+          sign: '*',
+          method: function (a, b) { return a * b; }
+        },
+        {
+          sign: '/',
+          method: function (a, b) { return a / b; }
+        },
+        {
+          sign: '%',
+          method: function (a, b) { return a % b; }
+        }
+      ];
+      var operatorEl = document.getElementById('operator');
+      var output = document.getElementById('output');
+      var numberOne = document.getElementById('numberOne');
+      var numberTwo = document.getElementById('numberTwo');
+
+      operatorEl.addEventListener('click', function () {
+        if (!numberOne.value || !numberTwo.value) {
+          output.innerText = "Enter some numbers...";
+          numberOne.focus();
+        } else {
+          var operatorIndex = Math.floor(Math.random() * operators.length);
+          var operator = operators[operatorIndex];
+          var numberOneVal = parseInt(numberOne.value);
+          var numberTwoVal = parseInt(numberTwo.value);
+          this.innerText = operator.sign;
+          output.innerText = operator.method(numberOneVal, numberTwoVal);
+        }
+      });
+    }(window));
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
